@@ -4,6 +4,15 @@ import matplotlib
 import matplotlib.pyplot as plt
 import os, sys
 
+"""
+1， k邻近分类算法
+2， 从文本文件中解析和导入数据
+3， 使用Matplotlib创建扩散图
+4， 归一化数值
+
+k邻近算法准确度较高，但是，它必须保存全部的数据集，实际使用时必须使用大量的数据空间，此外，它必须对每个数据计算距离值，这是非常耗时的。效率不高。
+"""
+
 def classify0(inX, dataSet, labels, k):
     """
     inX: 用于分类的输入向量
@@ -70,6 +79,9 @@ ax.scatter(datingMat[:,1], datingMat[:,2], 15.0*array(datingLabels), 15.0*array(
 plt.show()
 
 def autoNorm(dataSet):
+    """
+    数值归一化函数 -- 将数字特征值转化为0,1
+    """
     #参数0使函数从列中选取最小/大值
     minVals = dataSet.min(0)
     maxVals = dataSet.max(0)
