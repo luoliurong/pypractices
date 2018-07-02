@@ -100,3 +100,5 @@ def createTree(dataSet,labels):
 # practice: create tree
 myTree = createTree(ds, labels)
 print(myTree)
+
+

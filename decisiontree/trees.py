@@ -119,7 +119,7 @@ def getNumLeafs(myTree):
     获取叶节点的数目
     """
     numLeafs = 0
-    firstStr = myTree.keys()[0]
+    firstStr = list(myTree.keys())[0]
     secondDict = myTree[firstStr]
     for key in secondDict.keys():
         if type(secondDict[key]).__name__=="dict":
@@ -132,7 +132,7 @@ def getTreeDepth(myTree):
     获取树的层数
     """
     maxDepth = 0
-    firstStr = myTree.keys()[0]
+    firstStr = list(myTree.keys())[0]
     secondDict = myTree[firstStr]
     for key in secondDict.keys():
         if type(secondDict[key]).__name__ == "dict":
@@ -162,7 +162,7 @@ def plotMidText(cntrPt, parentPt, txtString):
 def plotTree(myTree, parentPt, nodeTxt):
     numLeafs = getNumLeafs(myTree)
     depth = getTreeDepth(myTree)
-    firstStr = myTree.keys()[0]
+    firstStr = list(myTree.keys())[0]
     cntrpt = (plotTree.xOff + (1.0+float(numLeafs))/2.0/plotTree.totalW, plotTree.yOff)
     plotMidText(cntrpt, parentPt, nodeTxt)
     plotNode(firstStr, cntrpt, parentPt, decisionNode)
@@ -202,3 +202,32 @@ def createPlot(intree):
 mytree = retrieveTree(0)
 print(mytree)
 #createPlot(mytree)
+
+def classify(inputTree,featLabels,testVec):
+    firstStr = list(inputTree.keys())[0]
+    secondDict = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    if isinstance(valueOfFeat, dict): 
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else: classLabel = valueOfFeat
+    return classLabel
+
+def storeTree(inputTree,filename):
+    import pickle
+    fw = open(filename,'w')
+    pickle.dump(inputTree,fw)
+    fw.close()
+    
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+
+myDat,labels=createDataSet()
+mytree = retrieveTree(0)
+resultLable = classify(mytree, labels, [1,0])
+print(resultLable)
+resultLable = classify(mytree, labels, [1,1])
+print(resultLable)
