@@ -60,3 +60,4 @@ p0v, p1v, pab = trainNB0(trainMat, listClasses)
 print(pab)
 print(p0v)
 print(p1v)
+
