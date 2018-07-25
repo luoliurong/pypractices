@@ -150,3 +150,15 @@ print(matrix3)
 matrix2 = mat([[1,2],[3,4],[5,6]], dtype=int)
 matrix4 = matrix1*matrix2
 print(matrix4)
+matrix5 = matrix1+2.0
+print(matrix5)
+matrix6 = matrix1-1.0
+print(matrix6)
+matrix7 = matrix1/2
+print(matrix7)
+
+#for some special matrix
+matrix1 = mat([[1,2,3]], dtype=int)
+#compiler error:!!!!!!!!
+#matrix2 = matrix1*matrix1
+#print(matrix2)
